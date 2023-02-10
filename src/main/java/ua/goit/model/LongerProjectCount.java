@@ -1,4 +1,4 @@
-package ua.goit;
+package ua.goit.model;
 
 public class LongerProjectCount {
     private String name;
@@ -15,5 +15,13 @@ public class LongerProjectCount {
 
     public int getMonthCount() {
         return monthCount;
+    }
+
+    @Override
+    public String toString() {
+        return "LongerProjectCount{" +
+                "name='" + name + '\'' +
+                ", monthCount=" + monthCount +
+                '}';
     }
 }

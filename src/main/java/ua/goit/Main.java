@@ -1,9 +1,13 @@
 package ua.goit;
 
+import ua.goit.database.databaseServices.DatabaseQueryService;
+import ua.goit.model.*;
+
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+
         List<MaxProjectCountClient> resultMaxProjectCountClient  = new DatabaseQueryService().findMaxProjectsClient();
         System.out.println("--MaxProjectCountClient--");
         for (MaxProjectCountClient element:resultMaxProjectCountClient) {

@@ -1,4 +1,4 @@
-package ua.goit;
+package ua.goit.utils;
 
 import java.io.IOException;
 import java.nio.file.Files;

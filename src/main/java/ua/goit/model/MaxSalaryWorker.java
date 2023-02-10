@@ -1,4 +1,4 @@
-package ua.goit;
+package ua.goit.model;
 
 public class MaxSalaryWorker {
     private String name;
@@ -15,5 +15,13 @@ public class MaxSalaryWorker {
 
     public int getSalary() {
         return salary;
+    }
+
+    @Override
+    public String toString() {
+        return "MaxSalaryWorker{" +
+                "name='" + name + '\'' +
+                ", salary=" + salary +
+                '}';
     }
 }

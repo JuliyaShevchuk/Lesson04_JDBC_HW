@@ -1,4 +1,4 @@
-package ua.goit;
+package ua.goit.model;
 
 public class YoungestOldestWorkers {
     private String name;
@@ -21,5 +21,14 @@ public class YoungestOldestWorkers {
 
     public String getType() {
         return type;
+    }
+
+    @Override
+    public String toString() {
+        return "YoungestOldestWorkers{" +
+                "name='" + name + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

@@ -1,4 +1,4 @@
-package ua.goit;
+package ua.goit.model;
 
 public class MaxProjectCountClient {
     private String name;
@@ -15,5 +15,13 @@ public class MaxProjectCountClient {
 
     public int getProjectCount() {
         return projectCount;
+    }
+
+    @Override
+    public String toString() {
+        return "MaxProjectCountClient{" +
+                "name='" + name + '\'' +
+                ", projectCount=" + projectCount +
+                '}';
     }
 }

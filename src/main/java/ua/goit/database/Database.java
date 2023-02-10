@@ -1,4 +1,4 @@
-package ua.goit;
+package ua.goit.database;
 
 import java.io.IOException;
 import java.sql.*;

@@ -1,5 +1,10 @@
-package ua.goit;
+package ua.goit.database.databaseServices;
 
+import ua.goit.database.Database;
+import ua.goit.utils.ReadFile;
+import ua.goit.model.*;
+
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,12 +28,22 @@ public class DatabaseQueryService {
                     String type = rs.getString("type");
                     result.add(new YoungestOldestWorkers(name, birthday,type));
                 }
-                return result;
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                database.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
+
         return result;
+
+
     }
     public List<ProjectPrices> projectPrices(){
         String fileName = "./sql/print_project_prices.sql";
@@ -43,10 +58,17 @@ public class DatabaseQueryService {
                     int suma = rs.getInt("suma");
                     result.add(new ProjectPrices(name, suma));
                 }
-                return result;
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                database.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         return result;
     }
@@ -63,10 +85,17 @@ public class DatabaseQueryService {
                     int salary = rs.getInt("salary");
                     result.add(new MaxSalaryWorker(name, salary));
                 }
-                return result;
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                database.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         return result;
     }
@@ -84,10 +113,17 @@ public class DatabaseQueryService {
                     int monthCount = rs.getInt("month_count");
                     result.add(new LongerProjectCount(name, monthCount));
                 }
-                return result;
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                database.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         return result;
     }
@@ -101,15 +137,21 @@ public class DatabaseQueryService {
         try (Statement st = database.getConnection().createStatement()) {
             try (ResultSet rs = st.executeQuery(contents)) {
                 while (rs.next()) {
-                    //                   System.out.println(rs.getString("name")+"  "+rs.getInt("project_count"));
                     String name = rs.getString("name");
                     int projectCount = rs.getInt("project_count");
                     result.add(new MaxProjectCountClient(name, projectCount));
                 }
-                return result;
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                database.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         return result;
     }
