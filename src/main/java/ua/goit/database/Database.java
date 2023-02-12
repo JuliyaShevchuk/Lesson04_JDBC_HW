@@ -1,5 +1,7 @@
 package ua.goit.database;
 
+import ua.goit.prefs.Prefs;
+
 import java.io.IOException;
 import java.sql.*;
 
@@ -9,7 +11,7 @@ public class Database {
     private Connection connection;
     private Database() {
         try{
-            String url = "jdbc:h2:./database2";
+            String url = new Prefs().getString(Prefs.DB_JDBC_CONNECTION_URL);
             connection = DriverManager.getConnection(url, "sa", "");
          } catch (SQLException e){
             e.printStackTrace();

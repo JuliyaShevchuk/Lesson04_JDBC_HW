@@ -5,6 +5,7 @@ import ua.goit.utils.ReadFile;
 import ua.goit.model.*;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,15 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseQueryService {
-    Database database = Database.getInstance();
 
-    public List<YoungestOldestWorkers> youngestOldestWorkers(){
+    public List<YoungestOldestWorkers> youngestOldestWorkers(Connection connect){
+
         String fileName = "./sql/find_youngest_oldest_workers.sql";
         String contents = new ReadFile().readUsingFiles(fileName);
 
         List<YoungestOldestWorkers> result = new ArrayList<>();
-
-        try (Statement st = database.getConnection().createStatement()) {
+        try (Statement st = connect.createStatement()) {
             try (ResultSet rs = st.executeQuery(contents)) {
                 while (rs.next()) {
                     String name = rs.getString("name");
@@ -31,27 +31,16 @@ public class DatabaseQueryService {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                database.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
         }
 
         return result;
-
-
     }
-    public List<ProjectPrices> projectPrices(){
+    public List<ProjectPrices> projectPrices(Connection connect){
         String fileName = "./sql/print_project_prices.sql";
         String contents = new ReadFile().readUsingFiles(fileName);
 
         List<ProjectPrices> result = new ArrayList<>();
-
-        try (Statement st = database.getConnection().createStatement()) {
+        try (Statement st = connect.createStatement()) {
             try (ResultSet rs = st.executeQuery(contents)) {
                 while (rs.next()) {
                     String name = rs.getString("name");
@@ -61,24 +50,16 @@ public class DatabaseQueryService {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            try {
-                database.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
         }
+
         return result;
     }
-    public List<MaxSalaryWorker> maxSalaryWorker(){
+    public List<MaxSalaryWorker> maxSalaryWorker(Connection connect){
         String fileName = "./sql/find_max_salary_worker.sql";
         String contents = new ReadFile().readUsingFiles(fileName);
 
         List<MaxSalaryWorker> result = new ArrayList<>();
-
-        try (Statement st = database.getConnection().createStatement()) {
+         try (Statement st = connect.createStatement()) {
             try (ResultSet rs = st.executeQuery(contents)) {
                 while (rs.next()) {
                     String name = rs.getString("name");
@@ -88,25 +69,17 @@ public class DatabaseQueryService {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            try {
-                database.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
         }
+
         return result;
     }
 
-    public List<LongerProjectCount> findLongerProject() {
+    public List<LongerProjectCount> findLongerProject(Connection connect) {
         String fileName = "./sql/find_longest_project.sql";
         String contents = new ReadFile().readUsingFiles(fileName);
 
         List<LongerProjectCount> result = new ArrayList<>();
-
-        try (Statement st = database.getConnection().createStatement()) {
+        try (Statement st = connect.createStatement()) {
             try (ResultSet rs = st.executeQuery(contents)) {
                 while (rs.next()) {
                     String name = rs.getString("name");
@@ -114,27 +87,19 @@ public class DatabaseQueryService {
                     result.add(new LongerProjectCount(name, monthCount));
                 }
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            try {
-                database.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
         }
         return result;
     }
 
-    public List<MaxProjectCountClient> findMaxProjectsClient() {
+    public List<MaxProjectCountClient> findMaxProjectsClient(Connection connect) {
         String fileName = "./sql/find_max_projects_client.sql";
         String contents = new ReadFile().readUsingFiles(fileName);
 
         List<MaxProjectCountClient> result = new ArrayList<>();
-
-        try (Statement st = database.getConnection().createStatement()) {
+        try (Statement st = connect.createStatement()) {
             try (ResultSet rs = st.executeQuery(contents)) {
                 while (rs.next()) {
                     String name = rs.getString("name");
@@ -144,14 +109,6 @@ public class DatabaseQueryService {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            try {
-                database.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
         }
         return result;
     }
